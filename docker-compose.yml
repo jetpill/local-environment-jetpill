@@ -1,0 +1,38 @@
+# Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
+version: '3.7'
+
+# Define services
+services:
+
+  # Database event sourcing
+  db-scylladb:
+    image: scylladb/scylla
+    ports:
+      - "9042:9042"
+    restart: always
+    networks:
+      - jetpill
+
+  db-postgresql:
+    image: postgres:12.2-alpine
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: jetpill
+    networks:
+      - jetpill
+
+  rabbitmq-broker-service:
+    image: rabbitmq:3.8.3-management-alpine
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+      - "25676:25676"
+    restart: always
+    networks:
+      - jetpill
+
+# Networks to be created to facilitate communication between containers
+networks:
+  jetpill:
