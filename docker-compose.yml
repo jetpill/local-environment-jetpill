@@ -4,15 +4,7 @@ version: '3.7'
 # Define services
 services:
 
-  # Database event sourcing
-  db-scylladb:
-    image: scylladb/scylla
-    ports:
-      - "9042:9042"
-    restart: always
-    networks:
-      - jetpill
-
+  #Database database    
   db-postgresql:
     image: postgres:12.2-alpine
     ports:
